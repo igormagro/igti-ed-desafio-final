@@ -1,0 +1,6 @@
+.env/
+airflow/*
+terraform/*
+
+!airflow/dags
+!terraform/*.tf
