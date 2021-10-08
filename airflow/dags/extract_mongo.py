@@ -34,7 +34,7 @@ def extract_and_load():
 
     ## [START upload file into raw zone]
     now = datetime.now()
-    filename = f"mongo_export.json"
+    filename = f"pnadc20203.json"
     obj = BytesIO(
             json.dumps(
                 data,
@@ -49,7 +49,7 @@ def extract_and_load():
     s3_client.upload_fileobj(
         obj,
         LANDING_ZONE,
-        f"mongo/extract_date={now.strftime(DATE_FORMAT_STR)}/{filename}"
+        f"pnadc20203/extract_date={now.strftime(DATE_FORMAT_STR)}/{filename}"
     )
     ## [END upload file into raw zone]
 
