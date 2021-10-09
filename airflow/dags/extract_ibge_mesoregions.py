@@ -7,9 +7,10 @@ import boto3
 import json
 from datetime import datetime, timedelta
 from io import BytesIO
+from os import getenv
 
 
-LANDING_ZONE = "imb-bronze-layer"
+LANDING_ZONE = getenv('LANDING_ZONE', 'landing')
 IBGE_ENDPOINT = "https://servicodados.ibge.gov.br/api/v1/localidades/mesorregioes"
 FILENAME = "ibge_mesoregions_export"
 DATE_FORMAT_STR = "%Y-%m-%d"

@@ -7,19 +7,20 @@ import boto3
 import json
 from datetime import datetime, timedelta
 from io import BytesIO
+from os import getenv
 
 
-LANDING_ZONE = "imb-bronze-layer"
-MONGO_URI = "mongodb+srv://estudante_igti:SRwkJTDz2nA28ME9@unicluster.ixhvw.mongodb.net/"
+LANDING_ZONE = getenv('LANDING_ZONE', 'landing')
+MONGO_URI = getenv('MONGO_URI')
 DATE_FORMAT_STR = "%Y-%m-%d"
 DATETIME_FORMAT_STR = "%Y-%m-%d %H:%M:%S"
 
 @task
-def start_mongo_ingestion():
+def start_pnadc_ingestion():
     print(f"[{datetime.now().strftime(DATETIME_FORMAT_STR)}] Started mongo_ingestion")
 
 @task
-def end_mongo_ingestion():
+def end_pnadc_ingestion():
     print(f"[{datetime.now().strftime(DATETIME_FORMAT_STR)}] Ended mongo_ingestion")
 
 @task.python
@@ -34,7 +35,7 @@ def extract_and_load():
 
     ## [START upload file into raw zone]
     now = datetime.now()
-    filename = f"pnadc20203.json"
+    filename = f"pnadc.json"
     obj = BytesIO(
             json.dumps(
                 data,
@@ -49,7 +50,7 @@ def extract_and_load():
     s3_client.upload_fileobj(
         obj,
         LANDING_ZONE,
-        f"pnadc20203/extract_date={now.strftime(DATE_FORMAT_STR)}/{filename}"
+        f"pnadc/extract_date={now.strftime(DATE_FORMAT_STR)}/{filename}"
     )
     ## [END upload file into raw zone]
 
@@ -68,11 +69,11 @@ default_args = {
     start_date=days_ago(1),
     tags = ["mongo", "ingestion", "igti"]
 )
-def mongo_ingestion():
-    start = start_mongo_ingestion()
+def pnadc_ingestion():
+    start = start_pnadc_ingestion()
     extract = extract_and_load()
-    end  = end_mongo_ingestion()
+    end  = end_pnadc_ingestion()
 
     start >> extract >> end
 
-dag = mongo_ingestion()
+dag = pnadc_ingestion()

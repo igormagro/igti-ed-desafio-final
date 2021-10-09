@@ -1,6 +1,6 @@
 variable "tags" {
   default = {
     "author" : "terraform",
-    "project" : "igti-final-challenge"
+    "project" : "igti-data-engineer-bootcamp-final-challenge"
   }
 }

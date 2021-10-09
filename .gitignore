@@ -4,3 +4,5 @@ terraform/*
 
 !airflow/dags
 !terraform/*.tf
+
+ENV.txt
