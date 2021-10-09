@@ -3,6 +3,7 @@ airflow/*
 terraform/*
 
 !airflow/dags
+!airflow/*.md
 !terraform/*.tf
 
 ENV.txt
