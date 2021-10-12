@@ -13,7 +13,7 @@ python --version
 
 ## Instalar Airflow
 ```bash
-pip install "airflow=2.1.4" --constaint "https://raw.githubusercontent.com/apache/airflow/constraints-2.1.4/constraints-<sua_versao_python>.txt"
+pip install "apache-airflow==2.1.4" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.1.4/constraints-<sua_versao_python>.txt"
 ```
 Uma vez instalado, denifir o diretorio root do Airflow
 ```bash
