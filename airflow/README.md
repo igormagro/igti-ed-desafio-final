@@ -4,7 +4,7 @@
 python -m venv .venv
 .venv/Scripts/activate
 ```
-**Obs**: o comando para ativar ambiente virtaul pode variar de acordo com o sistema operacional. 
+**Obs**: o comando para ativar ambiente virtual pode variar de acordo com o sistema operacional. 
 
 ## Checar versão Python
 ```bash
